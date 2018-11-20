@@ -21,13 +21,36 @@
             <artifactId>tomcat-catalina</artifactId>
             <version>${tomcat.version}</version>
         </dependency>
-        <!-- Add other Tomcat components such as Jasper, Websockets, Cluster, etc
+        <!-- Optional: Jasper -->
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jasper</artifactId>
             <version>${tomcat.version}</version>
         </dependency>
-        -->
+        <!-- Optional: Clustering -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina-ha</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
+        <!-- Optional: Websockets -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-websocket</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
+        <!-- Optional: DBCP based pool -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-dbcp</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
+        <!-- Optional: Store configuration listener -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-storeconfig</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
