@@ -1,14 +1,18 @@
 # Building
 
 ## Maven build
+
+Update Tomcat version number in the `pom.xml`.
+```
 mvn clean; mvn package
+```
 
 ## Docker build
 
 ```
 docker build -t apache/tomcat-maven:1.0 -f ./Dockerfile .
 ```
-Docker build arguments include `namepsace` (defaults to "myproject") and `port` which should match the Tomcat port in server.xml (default to 8080). Other ports can be added in the Dockerfile as needed.
+Docker build arguments include `namepsace` (default is `myproject`) and `port` which should match the Tomcat port in `server.xml` (default is `8080`). Other ports that need to be exposed can be added in the `Dockerfile` as needed. The `war` argument can be used to specify a compressed war package. Webapps can also be added to the `webapps` folder where they will be auto deployed by the host if using the defaults.
 
 # Configuration changes over Tomcat
 
@@ -17,7 +21,6 @@ Configuration is located in `conf/server.xml`, `conf/web.xml`, `conf/logging.pro
 # Running
 
 Add a webapp as folder mywebapp (for this example, or specify another path), or a path from which a configured Host will auto deploy
-
 ```
 --path: Specify a path the wepapp will use
 --war: Add the spcified path (directory or war) as a webapp (if no path has been specified, it will be the root webapp)
@@ -41,10 +44,7 @@ java -Dcatalina.base=. -Djava.util.logging.manager=org.apache.juli.ClassLoaderLo
 
 # Deployment
 
-If using the Kubernetes cloud clustering, the pod needs to have the persmission to view other pods. For exemple with Openshift, this is done with:
-
+If using the Kubernetes cloud clustering membership provider, the pod needs to have the persmission to view other pods. For exemple with Openshift, this is done with:
 ```
 oc policy add-role-to-user view system:serviceaccount:$(oc project -q):default -n $(oc project -q)
 ```
-
-
