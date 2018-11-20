@@ -16,7 +16,7 @@ Docker build arguments include `namepsace` (default is `myproject`) and `port` w
 
 # Configuration changes over Tomcat
 
-Configuration is located in `conf/server.xml`, `conf/web.xml`, `conf/logging.properties`, etc
+Configuration is located in `conf/server.xml`, `conf/web.xml`, `conf/logging.properties`, all other configuration files, resources and context files are located in `conf`, identical to standalone Tomcat.
 
 # Running
 
@@ -26,9 +26,9 @@ Add a webapp as folder mywebapp (for this example, or specify another path), or 
 --war: Add the spcified path (directory or war) as a webapp (if no path has been specified, it will be the root webapp)
 ```
 
-The JULI logging configuration is optional but makes logging more readable and configurable:
+The JULI logging manager configuration is optional but makes logging more readable and configurable:
 `-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.util.logging.config.file=conf/logging.properties`
-The default JULI configuration uses `catalina.base`, so specifying it with `-Dcatalina.base=.` is also useful.
+The default JULI configuration uses `catalina.base`, so specifying the system property with `-Dcatalina.base=.` is also useful.
 
 ## Command line example with a single root webapp
 
