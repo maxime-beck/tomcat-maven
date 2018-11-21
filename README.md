@@ -2,7 +2,7 @@
 
 ## Maven build
 
-Update Tomcat version number in the `pom.xml`.
+Update Tomcat version number in the `pom.xml`, customize Tomcat components in the dependencies to keep the ones needed (only the main `tomcat-catalina` is mandatory).
 ```
 mvn clean; mvn package
 ```
