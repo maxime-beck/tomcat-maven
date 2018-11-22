@@ -12,7 +12,7 @@ mvn clean; mvn package
 ```
 docker build -t apache/tomcat-maven:1.0 -f ./Dockerfile .
 ```
-Docker build arguments include `namepsace` (default is `myproject`) and `port` which should match the Tomcat port in `server.xml` (default is `8080`). Other ports that need to be exposed can be added in the `Dockerfile` as needed. The `war` argument can be used to specify a compressed war package. Webapps can also be added to the `webapps` folder where they will be auto deployed by the host if using the defaults.
+Docker build arguments include `namepsace` (default is `myproject`) and `port` which should match the Tomcat port in `server.xml` (default is `8080`). Other ports that need to be exposed can be added in the `Dockerfile` as needed. Webapps should be added to the `webapps` folder where they will be auto deployed by the host if using the defaults. Otherwise, the `Dockerfile` command line can be edited like below to include the necesary resources and command line arguments to run a single or multiple hardcoded web applications.
 
 # Configuration changes over Tomcat
 
