@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: tomcat-prometheus
+  creationTimestamp: 
+  labels:
+    run: tomcat-prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: tomcat-prometheus
+  template:
+    metadata:
+      creationTimestamp: 
+      labels:
+        run: tomcat-prometheus
+    spec:
+      containers:
+      - name: tomcat-prometheus
+        image: maxbeck/tomcat-prometheus
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 9090
+          name: jmx
+          protocol: TCP
+        resources: {}
+  strategy: {}

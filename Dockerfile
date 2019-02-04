@@ -8,19 +8,17 @@ ADD target/tomcat-maven-1.0.jar /deployments/app.jar
 ADD conf /deployments/conf
 ADD webapps /deployments/webapps
 
-# Copying the Jolokia Jar file
-ADD jolokia.jar /opt/jolokia/
+ADD jmx_prometheus_javaagent-0.11.0.jar /opt/prometheus/prometheus.jar
 
 WORKDIR /deployments
 
 ARG namespace=myproject
 ENV KUBERNETES_NAMESPACE=$namespace
 EXPOSE 8080
-# Don't forget to expose port 8778 as that is the port used by Jolokia
-EXPOSE 8778 
+EXPOSE 9090
 
 RUN sh -c 'touch app.jar'
 
-# Run Java configuring the path to Jolokia Jar and its configuration
-ENV JAVA_OPTS="-javaagent:/opt/jolokia/jolokia.jar=config=conf/jolokia.properties -Dcatalina.base=. -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.util.logging.config.file=conf/logging.properties -Djava.security.egd=file:/dev/urandom"
+ENV JAVA_OPTS="-javaagent:/opt/prometheus/prometheus.jar=9090:conf/config.yaml -Dcatalina.base=. -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.util.logging.config.file=conf/logging.properties -Djava.security.egd=file:/dev/urandom"
+
 ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar app.jar" ]

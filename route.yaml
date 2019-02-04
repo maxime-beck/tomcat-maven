@@ -1,0 +1,24 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: 'true'
+    prometheus.io/path: /metrics
+    prometheus.io/port: "9090"
+    prometheus.io/scrape: "true"
+  labels:
+    run: tomcat-prometheus
+  name: tomcat-prometheus
+  namespace: tomcat-prometheus
+spec:
+  host: tomcat-prometheus-tomcat-prometheus.router.default.svc.cluster.local
+  to:
+    kind: Service
+    name: tomcat-prometheus
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - host: tomcat-prometheus-tomcat-prometheus.router.default.svc.cluster.local
+    routerName: router
+    wildcardPolicy: None

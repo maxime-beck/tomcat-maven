@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata: 
+ name: tomcat-prometheus
+ labels: 
+   run: tomcat-prometheus
+   k8s-app: tomcat-prometheus
+spec:
+ ports: 
+  - 
+   protocol: TCP
+   port: 80
+   targetPort: 8080
+ selector: 
+   run: tomcat-prometheus
+   k8s-app: tomcat-prometheus
+status: 
+ loadBalancer: 

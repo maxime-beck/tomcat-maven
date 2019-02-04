@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: tomcat-prometheus
+  namespace: openshift-monitoring
+  labels: 
+    k8s-app: tomcat-prometheus
+spec:
+  endpoints: 
+  - port: metrics
+    interval: 10s
+  namespaceSelector:
+    matchNames:
+    - tomcat-prometheus
+  selector:
+    matchLabels: 
+      k8s-app: tomcat-prometheus
