@@ -75,13 +75,6 @@
       <!--For clustering, please take a look at documentation at:
           /docs/cluster-howto.html  (simple how to)
           /docs/config/cluster.html (reference documentation) -->
-      <!-- Defines a Kubernetes based cluster
-      <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster">
-        <Channel className="org.apache.catalina.tribes.group.GroupChannel">
-          <Membership className="org.apache.catalina.tribes.membership.cloud.CloudMembershipService"/>
-        </Channel>
-      </Cluster>
-      -->
 
       <!-- Use the LockOutRealm to prevent attempts to guess user passwords
            via a brute-force attack -->
@@ -109,7 +102,12 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-
+        <Valve className="org.apache.catalina.valves.HealthCheckValve" path="/health" />
+        <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster">
+          <Channel className="org.apache.catalina.tribes.group.GroupChannel">
+            <Membership className="org.apache.catalina.tribes.membership.cloud.CloudMembershipService" membershipProviderClassName="org.apache.catalina.tribes.membership.cloud.DNSMembershipProvider"/>
+          </Channel>
+        </Cluster>
       </Host>
     </Engine>
   </Service>
